@@ -24,7 +24,7 @@ public class UserController {
      */
     @GetMapping
     public ModelAndView list(Model model){
-        model.addAttribute("userList",userRespository.getUserList());
+        model.addAttribute("userList",userRespository.findAll());
         model.addAttribute("title","用户管理");
 
         return new ModelAndView("users/list","userModel",model);
@@ -38,7 +38,7 @@ public class UserController {
      */
     @GetMapping("{id}")
     public ModelAndView getUserById(@PathVariable("id") Long id,Model model){
-        model.addAttribute("user",userRespository.getUserById(id));
+        model.addAttribute("user",userRespository.findById(id).get());
         model.addAttribute("title","查看用户");
 
         return new ModelAndView("users/view","userModel",model);
@@ -51,7 +51,7 @@ public class UserController {
      */
     @GetMapping("/form")
     public ModelAndView createForm(Model model){
-        model.addAttribute("user",new User());
+        model.addAttribute("user",new User(null,null, null));
         model.addAttribute("title","创建用户");
 
         return new ModelAndView("users/form","userModel",model);
@@ -65,7 +65,7 @@ public class UserController {
      */
     @PostMapping
     public ModelAndView saveOrUpdateUser(User user,Model model){
-        userRespository.saveOrUpdteUser(user);
+        userRespository.save(user);
         System.out.println("添加或修改成功");
 
         //重定向到首页
@@ -78,7 +78,7 @@ public class UserController {
      */
     @GetMapping("/del/{id}")
     public ModelAndView deleteUser(@PathVariable("id") Long id){
-        userRespository.deleteUserById(id);
+        userRespository.deleteById(id);
 
         //重定向到首页
         return new ModelAndView("redirect:/users");
@@ -92,7 +92,7 @@ public class UserController {
      */
     @GetMapping("/modify/{id}")
     public ModelAndView modify(@PathVariable("id") Long id,Model model){
-        User user = userRespository.getUserById(id);
+        User user = userRespository.findById(id).get();
         System.out.println(user);
         model.addAttribute("user",user);
         model.addAttribute("title","修改用户");

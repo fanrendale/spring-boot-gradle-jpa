@@ -1,23 +1,29 @@
 package com.xjf.springboot.domain;
 
-import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author xjf
  * @date 2019/1/28 11:57
  */
-@Data
+@Entity     //实体
 public class User {
     /**
      * 实体的唯一标识
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)     //自增策略
     private Long id;
 
     private String name;
 
     private String email;
 
-    public User() {
+    protected User() {  //无参构造，设为protected，防止直接使用
     }
 
     public User(Long id, String name, String email) {

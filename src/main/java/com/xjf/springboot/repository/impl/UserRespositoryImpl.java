@@ -1,3 +1,4 @@
+/*
 package com.xjf.springboot.repository.impl;
 
 import com.xjf.springboot.domain.User;
@@ -10,10 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+*/
 /**
  * @author xjf
  * @date 2019/1/28 13:46
- */
+ *//*
+
 @Repository
 public class UserRespositoryImpl implements UserRespository {
     private static AtomicLong counter = new AtomicLong();
@@ -47,3 +50,4 @@ public class UserRespositoryImpl implements UserRespository {
         return new ArrayList<>(this.userMap.values());
     }
 }
+*/
