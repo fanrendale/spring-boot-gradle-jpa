@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>thyemleaf in action</title>
-
+<!--引入头部-->
+<head th:replace="~{fragments/header :: header}">
 </head>
 <body>
-<!--引入头部-->
-<div th:replace="~{fragments/header :: header}"></div>
-<br><br><br><br><br><br>
+<div class="container blog_content_container">
+    <h1 th:text="${userModel.title}" style="color: #6c757d"></h1>
+    <form action="/users" method="post" th:action="@{/users}" th:object="${userModel.user}">
+        <input type="hidden" name="id" th:value="*{id}">
 
-<h1 th:text="${userModel.title}"></h1>
-<form action="/users" method="post" th:action="@{/users}" th:object="${userModel.user}">
-    <input type="hidden" name="id" th:value="*{id}">
-    <label>姓名：</label>
-    <input type="text" name="name" th:value="*{name}"><br><br>
+        <div class="form-group row">
+            <label for="username" class="col-sm-1 col-form-label">姓名：</label>
+            <div class="col-sm-11">
+                <input class="form-control" id="username" type="text" name="name" th:value="*{name}">
+            </div>
+        </div>
 
-    <label>邮箱：</label>
-    <input type="text" name="email" th:value="*{email}"><br><br>
-
-    <input type="submit" value="提交">
-</form>
+        <div class="form-group row">
+            <label for="email" class="col-sm-1 col-form-label">邮箱：</label>
+            <div class="col-sm-11">
+                <input class="form-control" id="email" type="text" name="email" th:value="*{email}">
+            </div>
+        </div>
+        <input type="submit" class="btn btn-success" value="提交">
+    </form>
+</div>
 
 <!--引入底部-->
-<br><br><br><br><br><br>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

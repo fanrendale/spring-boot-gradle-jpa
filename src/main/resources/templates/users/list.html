@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>thyemleaf in action</title>
+<!--引入头部-->
+<head th:replace="~{fragments/header :: header}">
 </head>
 <body>
-<!--引入头部-->
-<div th:replace="~{fragments/header :: header}"></div>
-<br><br><br><br><br><br>
+<div class="container blog_content_container">
+    <h1 th:text="${userModel.title}" style="color: #6c757d"></h1>
+    <a class="btn btn-primary" href="/users/form" th:href="@{/users/form}" style="margin-bottom: 5px">添加用户</a>
 
-<h1 th:text="${userModel.title}"></h1>
-<a href="/users/form" th:href="@{/users/form}">添加用户</a>
-<table border="1px solid black">
-    <thead>
+    <table class="table">
+        <thead class="thead-dark">
         <tr>
-            <th>ID</th>
-            <th>邮箱</th>
-            <th>姓名</th>
+            <th scope="col">ID</th>
+            <th scope="col">邮箱</th>
+            <th scope="col">姓名</th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
+        <!--没有数据时，提示-->
         <tr  th:if="${userModel.userList.size() eq 0}">
             <td colspan="3">用户数据为空</td>
         </tr>
 
         <tr th:each="user : ${userModel.userList}" th:object="${user}">
-            <td th:text="*{id}"></td>
+            <td scope="row" th:text="*{id}"></td>
             <td th:text="*{email}"></td>
             <td ><a th:href="@{/users/}+*{id}" th:text="*{name}"></a></td>
         </tr>
-    </tbody>
-</table>
-
+        </tbody>
+    </table>
+</div>
 <!--引入底部-->
-<br><br><br><br><br><br>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>
